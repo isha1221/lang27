@@ -1,0 +1,13 @@
+x = 10
+y = 20
+
+    if x < y {
+        drucken("x is less than y")
+    } elf x > y {
+        drucken("x is greater than y")
+    } el {
+        drucken("x equals y")
+    }
+
+    z = x + y
+    drucken(z)

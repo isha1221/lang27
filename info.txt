@@ -1,0 +1,7 @@
+lang27 supports:
+
+Basic Syntax (e.g., variables, functions, loops)
+Data Types (e.g., integers, strings, lists)
+Operators (+, -, *, /, = for assignment)
+Control Flow (e.g., if-else, while, for)
+Input/Output (e.g., print, input)
