@@ -1,0 +1,3 @@
+*.lip
+*/__pycache__
+.vscode
