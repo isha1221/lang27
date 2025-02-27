@@ -2,8 +2,8 @@
 
 ## The language supports:
 
-- Basic Syntax (e.g., ```variables, functions, loops```)
-- Data Types (e.g., ```integers, strings, lists```)
+- Basic Syntax (e.g., ```variables```)
+- Data Types (e.g., ```integers, strings```)
 - Operators (```+, -, *, /, =``` for assignment)
 - Control Flow (e.g., ```if-else```)
 - Output (e.g., ```print```)
