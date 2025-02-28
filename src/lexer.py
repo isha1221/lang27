@@ -5,11 +5,13 @@ TOKEN_SPEC = [
     ('IF',        r'if'),                # If statement
     ('ELF',       r'elf'),               # Else if statement
     ('ELSE',      r'el'),                # Else statement
+    ('FOR',       r'for'),               # for loop
     ('EQ',        r'=='),                # Equals (must be before ASSIGN)
     ('NEQ',       r'!='),                # Not Equals
     ('LE',        r'<='),                # Less Than or Equal
     ('GE',        r'>='),                # Greater Than or Equal
     ('ASSIGN',    r'='),                 # Assignment
+    ('SEMICOLON',     r';'),             # Semicolon
     ('LT',        r'<'),                 # Less Than
     ('GT',        r'>'),                 # Greater Than
     ('NUMBER',    r'\d+'),               # Integer
@@ -27,6 +29,7 @@ TOKEN_SPEC = [
     ('SKIP',      r'[ \t]+'),            # Spaces and tabs (ignored)
 ]
 
+
 def tokenize(code):
     tokens = []
     pos = 0
@@ -38,11 +41,18 @@ def tokenize(code):
             if match:
                 text = match.group(0)
                 if token_type == 'STRING':
-                    tokens.append((token_type, text[1:-1]))  # Remove surrounding quotes
-                elif token_type != 'SKIP':  # Ignore spaces
+                    # Remove surrounding quotes
+                    tokens.append((token_type, text[1:-1]))
+                elif token_type == 'NUMBER':
+                    # Convert to integer
+                    tokens.append((token_type, int(text)))
+                elif token_type in ('SKIP', 'NEWLINE'):
+                    pass  # Ignore spaces and newlines
+                else:
                     tokens.append((token_type, text))
                 pos += len(text)
                 break
         if not match:
-            raise SyntaxError(f"Unexpected character: {code[pos]}")
+            raise SyntaxError(
+                f"Unexpected character: {code[pos]} at position {pos}")
     return tokens
