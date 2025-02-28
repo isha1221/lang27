@@ -6,6 +6,18 @@ TOKEN_SPEC = [
     ('ELF',       r'elf'),               # Else if statement
     ('ELSE',      r'el'),                # Else statement
     ('FOR',       r'for'),               # for loop
+    ('INPUT',     r'eingabe'),          # Input function
+    ('FUNCTION',  r'func'),              # Function declaration
+    ('TYPE_NUM',  r'num '),               # Number type declaration
+    ('TYPE_STR',  r'str'),               # String type declaration
+    ('TYPE_DEC',  r'dec'),               # Decimal/float type declaration
+    ('TYPE_CHR',  r'chr'),               # Character type declaration
+    ('TYPE_BOOL', r'bool'),              # Boolean type declaration
+    ('BOOL_TRUE', r'true'),              # Boolean true value
+    ('BOOL_FALSE',r'false'),             # Boolean false value
+    ('DECIMAL',   r'\d+\.\d+'),          # Decimal number (must be before NUMBER)
+    ('RETURN',    r'return'),            # Return statement
+    ('COMMA',     r','),                 # Comma for separating parameters
     ('EQ',        r'=='),                # Equals (must be before ASSIGN)
     ('NEQ',       r'!='),                # Not Equals
     ('LE',        r'<='),                # Less Than or Equal
@@ -46,6 +58,13 @@ def tokenize(code):
                 elif token_type == 'NUMBER':
                     # Convert to integer
                     tokens.append((token_type, int(text)))
+                elif token_type == 'DECIMAL':
+                    # Convert to float
+                    tokens.append((token_type, float(text)))
+                elif token_type == 'BOOL_TRUE':
+                    tokens.append((token_type, True))
+                elif token_type == 'BOOL_FALSE':
+                    tokens.append((token_type, False))
                 elif token_type in ('SKIP', 'NEWLINE'):
                     pass  # Ignore spaces and newlines
                 else:
