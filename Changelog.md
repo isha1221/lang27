@@ -15,7 +15,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Placeholder for bug fixes.
 
 ### Known Issues
-- Placeholder for currently known issues that are yet to be resolved.
+- Variable type (datatype) handling issue: An empty space `' '` must be appended after declaration throughout the program, including input types.
+
+
+## [0.0.3] - 2025-03-03
+### Added
+- Introduced `--help` flag to display usage instructions.
+- Introduced `--version` flag to display the interpreter version.
+
+### Changed
+- Improved command-line argument parsing by simplifying debug flag detection.
+- Removed unnecessary comments and redundant debug flag checks.
+- Enhanced error handling and refactored argument validation.
 
 ## [0.0.2] - 2025-02-28
 ### Added
@@ -39,3 +50,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Known Issues
 - Basic function support.
 - No input support.
+

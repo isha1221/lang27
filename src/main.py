@@ -4,9 +4,18 @@ from lexer import tokenize
 from langParser import Parser
 from langInterpreter import Interpreter
 
+def show_usage():
+    print("Usage: python main2.py <filename.lip> [--debug=true] [--version] [--help]")
+    print("\nOptions:")
+    print("  --debug=true   Enable debug mode to show detailed execution steps")
+    print("  --version      Show the interpreter version")
+    print("  --help         Display this help message")
+
+def show_version():
+    print("Lang27 v0.0.3")
+
 def run_code(code, debug=False):
     """Run a program written in our custom language"""
-    # Lexical analysis: Convert code string to tokens
     try:
         if debug:
             print("Starting lexical analysis...")
@@ -18,7 +27,6 @@ def run_code(code, debug=False):
             for i, token in enumerate(tokens):
                 print(f"  {i}: {token}")
         
-        # Parsing: Convert tokens to abstract syntax tree
         if debug:
             print("\nStarting parsing...")
         
@@ -30,7 +38,6 @@ def run_code(code, debug=False):
             for i, node in enumerate(ast):
                 print(f"  {i}: {node}")
         
-        # Interpretation: Execute the abstract syntax tree
         if debug:
             print("\nStarting interpretation...")
         
@@ -60,7 +67,6 @@ def run_file(file_path, debug=False):
     try:
         with open(file_path, 'r') as file:
             code = file.read()
-        # print(f"Running program from file: {file_path}")
         return run_code(code, debug)
     except FileNotFoundError:
         print(f"Error: File '{file_path}' not found")
@@ -71,18 +77,16 @@ def run_file(file_path, debug=False):
 
 # Main execution
 if __name__ == "__main__":
-    # Check if a file path is provided as a command-line argument
     if len(sys.argv) > 1:
+        if "--help" in sys.argv:
+            show_usage()
+            sys.exit(0)
+        if "--version" in sys.argv:
+            show_version()
+            sys.exit(0)
+        
         file_path = sys.argv[1]
-        
-        # Check for debug flag
-        debug_mode = False
-        for arg in sys.argv:
-            if arg.startswith('--debug='):
-                debug_value = arg.split('=')[1].lower()
-                if debug_value == 'true':
-                    debug_mode = True
-        
+        debug_mode = any(arg == "--debug=true" for arg in sys.argv)
         run_file(file_path, debug=debug_mode)
     else:
-        print("No .lip file specified. Usage: python main2.py <filename.lip> [--debug=true]")
+        show_usage()
